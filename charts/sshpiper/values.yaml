@@ -24,6 +24,14 @@ sshpiper:
     enabled: false
     max_failures: 5
     ban_duration: 60m
+  metrics:
+    enabled: false
+    port: 9000
+    type: ClusterIP
+    annotations: {}
+    # TODO: include ability to enable below metrics
+    #collect_pipe_create_errors: false
+    #collect_upstream_auth_failures: false
 
 image:
   repository: farmer1992/sshpiperd

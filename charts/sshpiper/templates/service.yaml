@@ -17,3 +17,25 @@ spec:
       name: sshpiper
   selector:
     {{- include "sshpiper.selectorLabels" . | nindent 4 }}
+{{- if .Values.sshpiper.metrics.enabled }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ printf "%s-metrics" (include "sshpiper.fullname" . ) }}
+  labels:
+    {{- include "sshpiper.labels" . | nindent 4 }}
+  {{- with .Values.sshpiper.metrics.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  type: {{ .Values.sshpiper.metrics.type }}
+  ports:
+    - port: {{ .Values.sshpiper.metrics.port }}
+      targetPort: 9000
+      protocol: TCP
+      name: metrics
+  selector:
+    {{- include "sshpiper.selectorLabels" . | nindent 4 }}
+{{- end }}

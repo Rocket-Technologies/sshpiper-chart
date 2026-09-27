@@ -67,7 +67,7 @@ Image tag depends on required plugins
 We take full image if more than Kubernetes plugin is required.
 */}}
 {{- define "sshpiper.imageTag" -}}
-{{- if .Values.sshpiper.failtoban.enabled }}
+{{- if or .Values.sshpiper.failtoban.enabled .Values.sshpiper.metrics.enabled }}
 {{- $tag := printf "full-%s" .Chart.AppVersion }}
 {{- default $tag .Values.image.tag }}
 {{- else }}
@@ -88,6 +88,10 @@ Pass arguments to enable individual plugins or allow complete arguments override
 {{- if .Values.sshpiper.failtoban.enabled }}
 - --
 - /sshpiperd/plugins/failtoban
+{{- if .Values.sshpiper.metrics.enabled }}
+- --
+- /sshpiperd/plugins/metrics
+{{- end }}
 {{- end }}
 {{- end }}
 {{- end }}
