@@ -92,7 +92,7 @@ Pass arguments to enable individual plugins or allow complete arguments override
 {{- if .Values.sshpiper.metrics.enabled }}
 - --
 - /sshpiperd/plugins/metrics
-- --port 9000
+- --port=9000
 {{/*TODO: make prettier */}}
 {{- if .Values.sshpiper.metrics.collect_pipe_create_errors }}
 - --collect_pipe_create_errors
