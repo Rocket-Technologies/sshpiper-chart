@@ -30,8 +30,8 @@ sshpiper:
     type: ClusterIP
     annotations: {}
     # TODO: include ability to enable below metrics
-    #collect_pipe_create_errors: false
-    #collect_upstream_auth_failures: false
+    collect_pipe_create_errors: false
+    collect_upstream_auth_failures: false
 
 image:
   repository: farmer1992/sshpiperd
