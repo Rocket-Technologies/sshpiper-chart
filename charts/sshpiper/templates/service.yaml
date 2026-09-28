@@ -10,6 +10,8 @@ metadata:
   {{- end }}
 spec:
   type: {{ .Values.service.type }}
+  {{- if .Values.service.externalTrafficPolicy }}
+  externalTrafficPolicy: {{ .Values.service.externalTrafficPolicy }}
   ports:
     - port: {{ .Values.service.port }}
       targetPort: 2222
@@ -31,6 +33,9 @@ metadata:
   {{- end }}
 spec:
   type: {{ .Values.sshpiper.metrics.type }}
+  {{- if .Values.sshpiper.metrics.externalTrafficPolicy }}
+  externalTrafficPolicy: {{ .Values.sshpiper.metrics.externalTrafficPolicy }}
+  {{- end }}
   ports:
     - port: {{ .Values.sshpiper.metrics.port }}
       targetPort: 9000

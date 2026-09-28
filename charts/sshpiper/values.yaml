@@ -28,6 +28,7 @@ sshpiper:
     enabled: false
     port: 9000
     type: ClusterIP
+    externalTrafficPolicy: Cluster
     annotations: {}
     # TODO: include ability to enable below metrics
     collect_pipe_create_errors: false
@@ -72,6 +73,7 @@ securityContext:
 service:
   type: ClusterIP
   port: 2222
+  externalTrafficPolicy: Cluster
   annotations: {}
 
 resources: {}
