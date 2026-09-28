@@ -26,13 +26,14 @@ sshpiper:
     ban_duration: 60m
   metrics:
     enabled: false
-    port: 9000
-    type: ClusterIP
-    externalTrafficPolicy: ""
-    annotations: {}
-    # TODO: include ability to enable below metrics
+    container_port: 9000
     collect_pipe_create_errors: false
     collect_upstream_auth_failures: false
+    service:
+      port: 9000
+      type: ClusterIP
+      externalTrafficPolicy: ""
+      annotations: {}
 
 image:
   repository: farmer1992/sshpiperd

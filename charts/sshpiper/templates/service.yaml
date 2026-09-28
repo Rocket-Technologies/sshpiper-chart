@@ -28,17 +28,17 @@ metadata:
   name: {{ printf "%s-metrics" (include "sshpiper.fullname" . ) }}
   labels:
     {{- include "sshpiper.labels" . | nindent 4 }}
-  {{- with .Values.sshpiper.metrics.annotations }}
+  {{- with .Values.sshpiper.metrics.service.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
-  type: {{ .Values.sshpiper.metrics.type }}
-  {{- if .Values.sshpiper.metrics.externalTrafficPolicy }}
-  externalTrafficPolicy: {{ .Values.sshpiper.metrics.externalTrafficPolicy }}
+  type: {{ .Values.sshpiper.metrics.service.type }}
+  {{- if .Values.sshpiper.metrics.service.externalTrafficPolicy }}
+  externalTrafficPolicy: {{ .Values.sshpiper.metrics.service.externalTrafficPolicy }}
   {{- end }}
   ports:
-    - port: {{ .Values.sshpiper.metrics.port }}
+    - port: {{ .Values.sshpiper.metrics.service.port }}
       targetPort: 9000
       protocol: TCP
       name: metrics

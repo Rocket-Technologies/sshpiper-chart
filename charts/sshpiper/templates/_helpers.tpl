@@ -89,16 +89,13 @@ Pass arguments to enable individual plugins or allow complete arguments override
 - --
 - /sshpiperd/plugins/failtoban
 {{- end }}
-{{- if .Values.sshpiper.metrics.enabled }}
+{{- with .Values.sshpiper.metrics }}
+{{- if .enabled }}
 - --
 - /sshpiperd/plugins/metrics
-- --port=9000
-{{/*TODO: make prettier */}}
-{{- if .Values.sshpiper.metrics.collect_pipe_create_errors }}
-- --collect-pipe-create-errors
-{{- end }}
-{{- if .Values.sshpiper.metrics.collect_upstream_auth_failures}}
-- --collect-upstream-auth-failures
+- --port={{ .container_port }}
+- --collect-pipe-create-errors={{ .collect_pipe_create_errors }}
+- --collect-upstream-auth-failures={{ .collect_upstream_auth_failures }}
 {{- end }}
 {{- end }}
 {{- end }}

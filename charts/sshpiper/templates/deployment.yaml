@@ -35,7 +35,7 @@ spec:
           - containerPort: 2222
           {{- if .Values.sshpiper.metrics.enabled }}
           - name: metrics
-            containerPort: 9000
+            containerPort: {{ .Values.sshpiper.metrics.container_port }}
             protocol: TCP
           {{- end }}
         env:
